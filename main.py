@@ -5,6 +5,7 @@ from operator import le
 import face_recognition
 import cv2
 import time
+import os
 import datetime
 app = Flask(__name__)
 app.secret_key="OOCheung"
@@ -143,6 +144,7 @@ def blurvideo(videoname):
         remaining = str(datetime.timedelta(seconds=remaining))
         currfps = fps2
     jobrunning = False
+    os.remove(videoname)
 @app.route('/info')
 def current():
     global jobrunning
