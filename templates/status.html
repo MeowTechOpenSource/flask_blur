@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <h1 id="blurps">Blurring - 0% [0/0] Completed.</h1>
+    <h1 id="fps">Current FPS:0</h1>
+    <h1 id="remain">Remaining Time:00:00:00</h1>
+</body>
+<script>
+    function autoRefresh() {
+        $.ajax({url: '/info', success: function(result){
+            //var data = JSON.parse(result)
+            var data = result
+            if (data["status"] == "working"){
+                document.getElementById("blurps").innerHTML = "Blurring - " + data["percent"] + " Completed.";
+                document.getElementById("fps").innerHTML = "Current FPS: " + data["fps"];
+                document.getElementById("remain").innerHTML = "Remaining Time: " + data["remaining"];
+            }
+            else{
+                document.getElementById("blurps").innerHTML = "Blurring - 100% Completed.";
+                document.getElementById("fps").innerHTML = "Current FPS: 0";
+                document.getElementById("remain").innerHTML = "Remaining Time: 00:00:00";
+                window.location.href = "/download_video.mp4"
+            }
+        }});
+    }
+    setInterval(autoRefresh, 500); // every 5 seconds
+    autoRefresh(); // on load
+</script>
+</html>
