@@ -40,7 +40,7 @@
 
    function checkfile(sender) {
       // 可接受的附檔名
-      var validExts = new Array(".mp4");
+      var validExts = new Array(".mp4",".MP4");
       var fileExt = sender.value;
       fileExt = fileExt.substring(fileExt.lastIndexOf('.'));
       if (validExts.indexOf(fileExt) < 0) {

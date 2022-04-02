@@ -57,7 +57,7 @@ def blurvideo(videoname):
         
         # Find all the faces and face encodings in the current frame of video
         if p % 3 == 1:
-            face_locations = face_recognition.face_locations(small_frame,)# model="cnn")
+            face_locations = face_recognition.face_locations(small_frame, model="cnn")
 
         # Display the results
         for top, right, bottom, left in face_locations:
@@ -144,6 +144,7 @@ def blurvideo(videoname):
         remaining = str(datetime.timedelta(seconds=remaining))
         currfps = fps2
     jobrunning = False
+    time.sleep(15)
     os.remove(videoname)
 @app.route('/info')
 def current():
@@ -179,4 +180,4 @@ def uploadfile():
 def status():
     return render_template("status.html")
 if __name__ == "__main__":
-	app.run(port=8888, debug=False)
+	app.run(host='0.0.0.0',port=8888, debug=False)
